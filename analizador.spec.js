@@ -2,10 +2,15 @@ var path = require('path');
 var should = require('should');
 var Matriz = require(path.resolve('./matriz'));
 var analizador = require(path.resolve('./analizador'));
+var matriz;
 
 describe("Analizador", function() {
+
+	beforeEach(function(){
+		matriz = new Matriz();
+	})
+
 	it("deve ter linha completa", function() {
-		var matriz = new Matriz();
 		var x = 0;
 
 		matriz.adicionarJogada('X', x, 0);
@@ -16,8 +21,11 @@ describe("Analizador", function() {
 	});
 
 	describe("não deve ter linha completa", function(){
+		it("se primeira coluna for nula", function() {
+			analizador.analizarLinha(matriz, 0).should.be.exactly(false);
+		});
+
 		it("se primeira coluna for diferente", function() {
-			var matriz = new Matriz();
 			var x = 0;
 
 			matriz.adicionarJogada('O', x, 0);
@@ -27,7 +35,6 @@ describe("Analizador", function() {
 			analizador.analizarLinha(matriz, x).should.be.exactly(false);
 		});
 		it("se segunda coluna for diferente", function() {
-			var matriz = new Matriz();
 			var x = 0;
 
 			matriz.adicionarJogada('X', x, 0);
@@ -37,7 +44,6 @@ describe("Analizador", function() {
 			analizador.analizarLinha(matriz, x).should.be.exactly(false);
 		});
 		it("se terceira coluna for diferente", function() {
-			var matriz = new Matriz();
 			var x = 0;
 
 			matriz.adicionarJogada('X', x, 0);
@@ -49,7 +55,6 @@ describe("Analizador", function() {
 	});
 
 	it("deve ter coluna completa", function() {
-		var matriz = new Matriz();
 		var y = 0;
 
 		matriz.adicionarJogada('X', 0, y);
@@ -60,8 +65,11 @@ describe("Analizador", function() {
 	});
 
 	describe("não deve ter coluna completa", function(){
+		it("se primeira linha for nula", function() {
+			analizador.analizarColuna(matriz, 0).should.be.exactly(false);
+		});
+
 		it("se primeira linha for diferente", function() {
-			var matriz = new Matriz();
 			var y = 0;
 
 			matriz.adicionarJogada('O', 0, y);
@@ -71,7 +79,6 @@ describe("Analizador", function() {
 			analizador.analizarColuna(matriz, y).should.be.exactly(false);
 		});
 		it("se segunda linha for diferente", function() {
-			var matriz = new Matriz();
 			var y = 0;
 
 			matriz.adicionarJogada('X', 0, y);
@@ -81,7 +88,6 @@ describe("Analizador", function() {
 			analizador.analizarColuna(matriz, y).should.be.exactly(false);
 		});
 		it("se terceira linha for diferente", function() {
-			var matriz = new Matriz();
 			var y = 0;
 
 			matriz.adicionarJogada('X', 0, y);
@@ -93,7 +99,6 @@ describe("Analizador", function() {
 	});
 
 	it("deve ter diagonal principal completa", function() {
-		var matriz = new Matriz();
 
 		matriz.adicionarJogada('X', 0, 0);
 		matriz.adicionarJogada('X', 1, 1);
@@ -103,8 +108,11 @@ describe("Analizador", function() {
 	});
 
 	describe("não deve ter diagonal principal completa", function(){
+		it("se primeiro item for nulo", function() {
+			analizador.analizarDiagonalPrincipal(matriz, 0).should.be.exactly(false);
+		});
+
 		it("se primeiro item for diferente", function() {
-			var matriz = new Matriz();
 
 			matriz.adicionarJogada('O', 0, 0);
 			matriz.adicionarJogada('X', 1, 1);
@@ -113,7 +121,6 @@ describe("Analizador", function() {
 			analizador.analizarDiagonalPrincipal(matriz).should.be.exactly(false);
 		});
 		it("se segundo item for diferente", function() {
-			var matriz = new Matriz();
 
 			matriz.adicionarJogada('X', 0, 0);
 			matriz.adicionarJogada('O', 1, 1);
@@ -122,7 +129,6 @@ describe("Analizador", function() {
 			analizador.analizarDiagonalPrincipal(matriz).should.be.exactly(false);
 		});
 		it("se terceiro item for diferente", function() {
-			var matriz = new Matriz();
 
 			matriz.adicionarJogada('X', 0, 0);
 			matriz.adicionarJogada('X', 1, 1);
@@ -133,7 +139,6 @@ describe("Analizador", function() {
 	});
 	
 	it("deve ter diagonal secundaria completa", function() {
-		var matriz = new Matriz();
 
 		matriz.adicionarJogada('X', 0, 2);
 		matriz.adicionarJogada('X', 1, 1);
@@ -143,8 +148,11 @@ describe("Analizador", function() {
 	});
 
 	describe("não deve ter diagonal secundaria completa", function(){
+		it("se primeiro item for nulo", function() {
+			analizador.analizarDiagonalSecundaria(matriz, 0).should.be.exactly(false);
+		});
+
 		it("se primeiro item for diferente", function() {
-			var matriz = new Matriz();
 
 			matriz.adicionarJogada('O', 0, 2);
 			matriz.adicionarJogada('X', 1, 1);
@@ -153,7 +161,6 @@ describe("Analizador", function() {
 			analizador.analizarDiagonalSecundaria(matriz).should.be.exactly(false);
 		});
 		it("se segundo item for diferente", function() {
-			var matriz = new Matriz();
 
 			matriz.adicionarJogada('X', 0, 2);
 			matriz.adicionarJogada('O', 1, 1);
@@ -162,7 +169,6 @@ describe("Analizador", function() {
 			analizador.analizarDiagonalSecundaria(matriz).should.be.exactly(false);
 		});
 		it("se terceiro item for diferente", function() {
-			var matriz = new Matriz();
 
 			matriz.adicionarJogada('X', 0, 2);
 			matriz.adicionarJogada('X', 1, 1);
